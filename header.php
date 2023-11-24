@@ -8,7 +8,7 @@ include('session.php');
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="dashboard.php"><div class="w3-bar-item w3-button">Lista de alumnos</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_armas.php"><div class="w3-bar-item w3-button">Lista de armas</div></a>
             <div class="w3-bar-item w3-button">Lista de materias</div>
-            <div class="w3-bar-item w3-button">-</div>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="asignacion_form.php"><div class="w3-bar-item w3-button">Asignacion de aulas</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="ingresar_alumno.php"><div class="w3-bar-item w3-button">Ingresar alumno</div></a>
 
 
