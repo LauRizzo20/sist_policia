@@ -84,49 +84,6 @@ include('db_config.php');
 <script src="js/jquery.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
 <script src="js/editar_prof.js"></script>
-<script>
-        //Muestra de modal
-        $(document).on("click", ".open", function() {
-                    // Obtén el valor del ID del botón
-                    let modalId = $(this).attr("id");
-                    
-                    //alert(modalId);
-                    // Realiza una solicitud AJAX para obtener los datos de la base de datos
-                   $.ajax({
-                        url: 'modal_edit_prof.php',
-                        method: 'POST',
-                        data: { id: modalId },
-                        success: function (response) {
-                            // Actualiza el contenido del modal con los datos obtenidos
-                            modalContent.innerHTML = response;
-                            // Muestra el modal
-                            $('#myModal').modal('show');
-                        },
-                        error: function (error) {
-                            console.error("Error");
-                        }
-                    });
-                });
-                $(document).on("click", ".edit", function() {
-                    // Obtén el valor del ID del botón
-                    let modalId = $(this).attr("id");
-                    
-                    //alert(modalId);
-                    // Realiza una solicitud AJAX para obtener los datos de la base de datos
-                   $.ajax({
-                        url: 'modal_cont_prof.php',
-                        method: 'POST',
-                        data: { id: modalId },
-                        success: function (response) {
-                            // Actualiza el contenido del modal con los datos obtenidos
-                            modalContent.innerHTML = response;
-                            // Muestra el modal
-                            $('#myModal').modal('show');
-                        },
-                        error: function (error) {
-                            console.error("Error");
-                        }
-                    });
-                });
-</script>
+<script src="js/baja_prof.js"></script>
+<script src="js/modal_prof.js"></script>
 </html>

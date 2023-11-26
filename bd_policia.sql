@@ -50,7 +50,13 @@ CREATE TABLE `aula_asig` (
   `cuatrimestre_asig` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `bajas` (
+CREATE TABLE `bajas_almn` (
+  `id_baja` int(11) NOT NULL,
+  `dni_almn` int(8) NOT NULL,
+  `razon_baja` varchar(1064) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `bajas_prof` (
   `id_baja` int(11) NOT NULL,
   `dni_almn` int(8) NOT NULL,
   `razon_baja` varchar(1064) NOT NULL
