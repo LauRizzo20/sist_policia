@@ -123,7 +123,9 @@ CREATE TABLE `nacimiento_almn` (
 CREATE TABLE `notas_almn` (
   `id_almn` int(11) NOT NULL,
   `id_notas` int(11) NOT NULL,
-  `content` text NOT NULL
+  `id_mat` int(11) NOT NULL,
+  `tipo_nota` varchar(25) NOT NULL,
+  `nota` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `profesores` (
@@ -202,7 +204,8 @@ ALTER TABLE `nacimiento_almn`
 
 ALTER TABLE `notas_almn`
   ADD PRIMARY KEY (`id_notas`),
-  ADD KEY `id_almn` (`id_almn`);
+  ADD KEY `id_almn` (`id_almn`),
+  ADD KEY `id_mat` (`id_mat`);
 
 ALTER TABLE `profesores`
   ADD PRIMARY KEY (`id_prof`);
