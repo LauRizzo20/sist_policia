@@ -120,6 +120,12 @@ CREATE TABLE `nacimiento_almn` (
   `pais` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `notas_almn` (
+  `id_almn` int(11) NOT NULL,
+  `id_notas` int(11) NOT NULL,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `profesores` (
   `id_prof` int(11) NOT NULL,
   `nombre_prof` varchar(20) NOT NULL,
@@ -194,6 +200,10 @@ ALTER TABLE `materias`
 ALTER TABLE `nacimiento_almn`
   ADD KEY `id_almn` (`id_almn`);
 
+ALTER TABLE `notas_almn`
+  ADD PRIMARY KEY (`id_notas`),
+  ADD KEY `id_almn` (`id_almn`);
+
 ALTER TABLE `profesores`
   ADD PRIMARY KEY (`id_prof`);
 
@@ -215,6 +225,9 @@ ALTER TABLE `fechas`
 
 ALTER TABLE `materias`
   MODIFY `id_mat` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `notas_almn`
+  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `profesores`
   MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT;
