@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2023 a las 11:00:27
+-- Tiempo de generación: 28-11-2023 a las 20:32:31
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -49,6 +49,13 @@ CREATE TABLE `alumnos` (
   `arma_almn` varchar(40) NOT NULL,
   `condicion_almn` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`dni_almn`, `nom_almn`, `apell_almn`, `sex_almn`, `fdn_almn`, `ldn_almn`, `email_almn`, `telefono_almn`, `cp_almn`, `distrito_almn`, `domicilio_almn`, `compañia_almn`, `legajo_almn`, `destino_almn`, `comisaria_almn`, `secundario_almn`, `nacionalidad_almn`, `aula_almn`, `arma_almn`, `condicion_almn`) VALUES
+(47025610, 'Danilo', 'Simone', 'M', '0000-00-00', '', '', '', 0, '', '', 0, 0, '', '', '', '', '1', '', '');
 
 -- --------------------------------------------------------
 
@@ -169,7 +176,8 @@ CREATE TABLE `logs_creacion` (
 
 INSERT INTO `logs_creacion` (`nombre_tab`, `id_log`, `fecha_creacion`, `razon_creacion`, `detalles_creacion`) VALUES
 ('materias', 1, '2023-11-28', 'Creación de materia', 'Nombre de Materia: 3 \nCarga Horaria: 3 \nCurrícula: LIBRE'),
-('materias', 2, '2023-11-28', 'Creación de materia', 'Nombre de Materia: Derecho Penal \nCarga Horaria: 200 \nCurrícula: Sin Asignar');
+('materias', 2, '2023-11-28', 'Creación de materia', 'Nombre de Materia: Derecho Penal \nCarga Horaria: 200 \nCurrícula: Sin Asignar'),
+('materias', 3, '2023-11-28', 'Creación de materia', 'Nombre de Materia: Ciberseguridad \nCarga Horaria: 250 \nCurrícula: CUATRIMESTRAL');
 
 -- --------------------------------------------------------
 
@@ -216,7 +224,35 @@ CREATE TABLE `materias` (
 --
 
 INSERT INTO `materias` (`nombre_mat`, `id_mat`, `c_horaria_mat`, `curricula_mat`) VALUES
-('Derecho Penal', 8, '200', 'ANUAL');
+('Derecho Penal', 8, '200', 'ANUAL'),
+('Ciberseguridad', 9, '250', 'CUATRIMESTRAL');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notas`
+--
+
+CREATE TABLE `notas` (
+  `id_nota` int(11) NOT NULL,
+  `id_mat` int(11) NOT NULL,
+  `tipo_nota` varchar(255) NOT NULL,
+  `dni_almn` int(11) NOT NULL,
+  `num_nota` int(11) NOT NULL,
+  `fecha_nota` date NOT NULL,
+  `comentario_nota` varchar(1064) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `notas`
+--
+
+INSERT INTO `notas` (`id_nota`, `id_mat`, `tipo_nota`, `dni_almn`, `num_nota`, `fecha_nota`, `comentario_nota`) VALUES
+(1, 8, 'Primer Parcial', 47025610, 8, '2023-11-28', 'Prueba.'),
+(8, 0, 'Recuperatorio 1', 47025610, 4, '2021-11-28', ''),
+(9, 8, 'Recuperatorio 1', 47025610, 2, '0000-00-00', 'Comment.'),
+(10, 8, 'Segundo Parcial', 47025610, 3, '2023-11-28', ''),
+(11, 9, 'Recuperatorio 2', 47025610, 5, '2023-11-28', '');
 
 -- --------------------------------------------------------
 
@@ -347,6 +383,12 @@ ALTER TABLE `materias`
   ADD PRIMARY KEY (`id_mat`);
 
 --
+-- Indices de la tabla `notas`
+--
+ALTER TABLE `notas`
+  ADD PRIMARY KEY (`id_nota`);
+
+--
 -- Indices de la tabla `profesores`
 --
 ALTER TABLE `profesores`
@@ -391,7 +433,7 @@ ALTER TABLE `logs_cambios`
 -- AUTO_INCREMENT de la tabla `logs_creacion`
 --
 ALTER TABLE `logs_creacion`
-  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `logs_eliminacion`
@@ -403,7 +445,13 @@ ALTER TABLE `logs_eliminacion`
 -- AUTO_INCREMENT de la tabla `materias`
 --
 ALTER TABLE `materias`
-  MODIFY `id_mat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_mat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `id_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `profesores`

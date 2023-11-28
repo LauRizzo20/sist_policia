@@ -100,7 +100,6 @@ include("db_config.php");
     </div>
 
     <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.tabledit.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/ingresar_materia.js"></script>
     <script src="js/editar_materia.js"></script>
