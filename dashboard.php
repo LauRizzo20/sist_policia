@@ -46,7 +46,7 @@ include('db_config.php');
         $dni = $row['dni_almn'];
     ?>
     <tr>
-      <td><?php echo $row['nom_almn'].' '.$row['apell_almn']; ?></td>
+      <td><?php echo $row['nombre_almn'].' '.$row['apellido_almn']; ?></td>
       <td>
         <button id="<?php echo $dni; ?>" value="<?php echo $dni; ?>" class="btn btn-success open">Ver info</button>
       </td>

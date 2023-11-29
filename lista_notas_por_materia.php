@@ -15,13 +15,28 @@ if (isset($_GET['materia'])) {
     // Get the nombre_mat for displaying as title
     $query_nombre_mat = "SELECT nombre_mat FROM materias WHERE id_mat = '$idMat'";
     $result_nombre_mat = mysqli_query($conn, $query_nombre_mat);
-    $row_nombre_mat = mysqli_fetch_assoc($result_nombre_mat);
-    $nombreMat = $row_nombre_mat['nombre_mat'];
-    $sql_alumnos = "SELECT dni_almn, nom_almn, apell_almn, sex_almn, aula_almn FROM alumnos";
-    $query_alumnos = mysqli_query($conn, $sql_alumnos);
+
+    // Check if the query for fetching nombre_mat was successful
+    if ($result_nombre_mat) {
+        $row_nombre_mat = mysqli_fetch_assoc($result_nombre_mat);
+
+        // Check if the fetched row is not null and 'nombre_mat' is set
+        if ($row_nombre_mat && isset($row_nombre_mat['nombre_mat'])) {
+            $nombreMat = $row_nombre_mat['nombre_mat'];
+            $sql_alumnos = "SELECT dni_almn, nombre_almn, apellido_almn, sexo_almn, id_aula FROM alumnos";
+            $query_alumnos = mysqli_query($conn, $sql_alumnos);
+        } else {
+            // Redirect if nombre_mat is not available
+            header("Location: materia_notas.php");
+            exit();
+        }
+    } else {
+        // Redirect if the query for fetching nombre_mat failed
+        header("Location: materia_notas.php");
+        exit();
+    }
 } else {
     // Redirect or handle the case when id_mat is not provided
-    // For now, let's redirect to materia_notas.php
     header("Location: materia_notas.php");
     exit();
 }
@@ -78,13 +93,22 @@ if (isset($_GET['materia'])) {
     <tbody>
         <?php
         while ($alumno = mysqli_fetch_assoc($query_alumnos)) {
+            $aula_almn = $alumno['id_aula'];
+            $sql_aula =  "SELECT nro_aula FROM aula WHERE id_aula = $aula_almn";
+            $query_aula = mysqli_query($conn, $sql_aula);    
+            if ($query_aula) {
+                $aula_data = mysqli_fetch_assoc($query_aula);
+        
+            } else {
+                $aula_data = 'Sin Aula';
+            }
         ?>
             <tr>
                 <td><?php echo $alumno['dni_almn']; ?></td>
-                <td><?php echo $alumno['nom_almn']; ?></td>
-                <td><?php echo $alumno['apell_almn']; ?></td>
-                <td><?php echo $alumno['sex_almn']; ?></td>
-                <td><?php echo $alumno['aula_almn']; ?></td>
+                <td><?php echo $alumno['nombre_almn']; ?></td>
+                <td><?php echo $alumno['apellido_almn']; ?></td>
+                <td><?php echo $alumno['sexo_almn']; ?></td>
+                <td><?php echo $aula_data['nro_aula']; ?></td>
                 <td>
                     <button class="verNotas btn btn-info" data-id="<?php echo $alumno['dni_almn']; ?>">Ver Notas</button>
                 </td>

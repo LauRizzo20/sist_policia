@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 04:57:41
+-- Tiempo de generación: 29-11-2023 a las 14:34:42
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,9 +32,19 @@ CREATE TABLE `alumnos` (
   `dni_almn` int(20) NOT NULL,
   `nombre_almn` varchar(40) NOT NULL,
   `apellido_almn` varchar(40) NOT NULL,
-  `id_aula` int(20) NOT NULL,
+  `sexo_almn` varchar(1) NOT NULL,
+  `id_aula` int(20) DEFAULT NULL,
   `condicion_almn` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`id_almn`, `dni_almn`, `nombre_almn`, `apellido_almn`, `sexo_almn`, `id_aula`, `condicion_almn`) VALUES
+(1, 45095322, 'Juan', 'Sánchez', 'M', 2, 0),
+(2, 47025610, 'Danilo', 'Simone', 'M', 3, 0),
+(3, 43618723, 'Claudia María', 'Gonzalez Soledad', 'F', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -72,6 +82,14 @@ CREATE TABLE `aula` (
   `nro_aula` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `aula`
+--
+
+INSERT INTO `aula` (`id_aula`, `nro_aula`) VALUES
+(2, 1),
+(3, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -84,6 +102,13 @@ CREATE TABLE `aula_asig` (
   `id_prof` int(11) NOT NULL,
   `cuatrimestre_asig` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `aula_asig`
+--
+
+INSERT INTO `aula_asig` (`id_aula`, `id_mat`, `id_prof`, `cuatrimestre_asig`) VALUES
+(2, 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -137,6 +162,26 @@ CREATE TABLE `fechas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `inasistencias`
+--
+
+CREATE TABLE `inasistencias` (
+  `dni_almn` int(11) NOT NULL,
+  `inasistencias_totales` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inasistencias`
+--
+
+INSERT INTO `inasistencias` (`dni_almn`, `inasistencias_totales`) VALUES
+(47025610, 70),
+(45095322, 75),
+(43618723, 55);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `logs_cambios`
 --
 
@@ -153,7 +198,8 @@ CREATE TABLE `logs_cambios` (
 --
 
 INSERT INTO `logs_cambios` (`nombre_tab`, `id_log`, `fecha_cambio`, `razon_cambio`, `detalles_cambio`) VALUES
-('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE');
+('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE'),
+('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Derecho Penal. \nCarga Horaria: 200. \nCurrícula: ANUAL');
 
 -- --------------------------------------------------------
 
@@ -216,7 +262,7 @@ CREATE TABLE `materias` (
 --
 
 INSERT INTO `materias` (`nombre_mat`, `id_mat`, `c_horaria_mat`, `curricula_mat`) VALUES
-('Santiago', 0, '69', 'PROMOCIONABLE');
+('Derecho Penal', 0, '200', 'ANUAL');
 
 -- --------------------------------------------------------
 
@@ -254,7 +300,10 @@ CREATE TABLE `notas` (
 --
 
 INSERT INTO `notas` (`id_nota`, `id_mat`, `tipo_nota`, `dni_almn`, `num_nota`, `fecha_nota`, `comentario_nota`) VALUES
-(0, 0, 'Conducta', 47025610, 10, '2023-11-29', 'Un capo');
+(7, 0, 'Primer Parcial', 45095322, 7, '2023-11-29', ''),
+(8, 0, 'Recuperatorio 1', 45095322, 8, '2023-11-29', ''),
+(9, 0, 'Segundo Parcial', 45095322, 9, '2023-11-29', ''),
+(10, 0, 'Recuperatorio 2', 45095322, 10, '2023-11-29', '');
 
 -- --------------------------------------------------------
 
@@ -269,6 +318,13 @@ CREATE TABLE `profesores` (
   `dni_prof` int(8) NOT NULL,
   `legajo_prof` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `profesores`
+--
+
+INSERT INTO `profesores` (`id_prof`, `nombre_prof`, `apellido_prof`, `dni_prof`, `legajo_prof`) VALUES
+(3, 'Mauro', 'Gonzalez', 14676842, 129324);
 
 -- --------------------------------------------------------
 
@@ -374,6 +430,12 @@ ALTER TABLE `nacimiento_almn`
   ADD KEY `id_almn` (`id_almn`);
 
 --
+-- Indices de la tabla `notas`
+--
+ALTER TABLE `notas`
+  ADD PRIMARY KEY (`id_nota`);
+
+--
 -- Indices de la tabla `profesores`
 --
 ALTER TABLE `profesores`
@@ -396,10 +458,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `id_almn` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `bajas`
@@ -420,10 +488,16 @@ ALTER TABLE `fechas`
   MODIFY `id_fecha` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `id_nota` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `user`
