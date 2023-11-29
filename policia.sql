@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 16:09:06
+-- Tiempo de generación: 29-11-2023 a las 18:41:45
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.3
 
@@ -58,6 +58,17 @@ CREATE TABLE `armas` (
   `modelo_arma` varchar(20) NOT NULL,
   `marca_arma` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `armas`
+--
+
+INSERT INTO `armas` (`nroSerie_arma`, `tipo_arma`, `modelo_arma`, `marca_arma`) VALUES
+(1, 'Pistola', 'Glock 17', 'Glock'),
+(2, 'Rifle', 'AR-15', 'Colt'),
+(3, 'Escopeta', 'Mossberg 500', 'Mossberg'),
+(4, 'Subfusil', 'MP5', 'Heckler & Koch'),
+(5, 'Revólver', 'Smith & Wesson 686', 'Smith & Wesson');
 
 -- --------------------------------------------------------
 
@@ -228,8 +239,9 @@ CREATE TABLE `logs_cambios` (
 --
 
 INSERT INTO `logs_cambios` (`nombre_tab`, `id_log`, `fecha_cambio`, `razon_cambio`, `detalles_cambio`) VALUES
-('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE'),
-('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Derecho Penal. \nCarga Horaria: 200. \nCurrícula: ANUAL');
+('materias', 1, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE'),
+('materias', 2, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Derecho Penal. \nCarga Horaria: 200. \nCurrícula: ANUAL'),
+('profesores', 5, '2023-11-29', 'Actualización de profesor', 'Detalles antes del cambio: \nID: 3. \nNombre del profesor: Mauricio Gonzalez. \nDNI: 14676842. \nNro legajo: 129324 \n\nDetalles después del cambio: \nID: 3. \nNombre del profesor: Mauricio Gonzalez. \nDNI: 14676842. Nro legajo: 129324');
 
 -- --------------------------------------------------------
 
@@ -250,8 +262,8 @@ CREATE TABLE `logs_creacion` (
 --
 
 INSERT INTO `logs_creacion` (`nombre_tab`, `id_log`, `fecha_creacion`, `razon_creacion`, `detalles_creacion`) VALUES
-('materias', 0, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ANUAL'),
-('materias', 0, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ÚNICA AL FINAL');
+('materias', 1, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ANUAL'),
+('materias', 2, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ÚNICA AL FINAL');
 
 -- --------------------------------------------------------
 
@@ -272,7 +284,8 @@ CREATE TABLE `logs_eliminacion` (
 --
 
 INSERT INTO `logs_eliminacion` (`nombre_tab`, `id_log`, `fecha_delete`, `razon_delete`, `detalles_delete`) VALUES
-('materias', 0, '2023-11-29', 'ME EQUIVOQUE PERDON', 'ID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ANUAL');
+('materias', 1, '2023-11-29', 'ME EQUIVOQUE PERDON', 'ID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ANUAL'),
+('profesores', 3, '2023-11-29', 'dispararse en la pierna', 'ID: 4. \nNombre del profesor: Mario Renaldi. \nDNI: 11111111. \nNro legajo: 3214');
 
 -- --------------------------------------------------------
 
@@ -346,15 +359,17 @@ CREATE TABLE `profesores` (
   `nombre_prof` varchar(20) NOT NULL,
   `apellido_prof` varchar(20) NOT NULL,
   `dni_prof` int(8) NOT NULL,
-  `legajo_prof` int(10) NOT NULL
+  `legajo_prof` int(10) NOT NULL,
+  `condicion_prof` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `profesores`
 --
 
-INSERT INTO `profesores` (`id_prof`, `nombre_prof`, `apellido_prof`, `dni_prof`, `legajo_prof`) VALUES
-(3, 'Mauro', 'Gonzalez', 14676842, 129324);
+INSERT INTO `profesores` (`id_prof`, `nombre_prof`, `apellido_prof`, `dni_prof`, `legajo_prof`, `condicion_prof`) VALUES
+(3, 'Mauricio', 'Gonzalez', 14676842, 129324, 0),
+(4, 'Mario', 'Renaldi', 11111111, 3214, 1);
 
 -- --------------------------------------------------------
 
@@ -466,6 +481,24 @@ ALTER TABLE `fechas`
   ADD PRIMARY KEY (`id_fecha`);
 
 --
+-- Indices de la tabla `logs_cambios`
+--
+ALTER TABLE `logs_cambios`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indices de la tabla `logs_creacion`
+--
+ALTER TABLE `logs_creacion`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indices de la tabla `logs_eliminacion`
+--
+ALTER TABLE `logs_eliminacion`
+  ADD PRIMARY KEY (`id_log`);
+
+--
 -- Indices de la tabla `nacimiento_almn`
 --
 ALTER TABLE `nacimiento_almn`
@@ -530,6 +563,24 @@ ALTER TABLE `fechas`
   MODIFY `id_fecha` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `logs_cambios`
+--
+ALTER TABLE `logs_cambios`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `logs_creacion`
+--
+ALTER TABLE `logs_creacion`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `logs_eliminacion`
+--
+ALTER TABLE `logs_eliminacion`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
@@ -539,7 +590,7 @@ ALTER TABLE `notas`
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
-  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `user`

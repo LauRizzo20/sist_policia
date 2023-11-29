@@ -1,12 +1,12 @@
 $(document).ready(function(){
     $(document).on("click", ".baja", function(){
-        let dni = $(this).attr("id");
+        let id = $(this).attr("id");
         var razon = $("#razon").val();
 
         $.ajax({
         type: "POST",
         url: "baja_prof.php",  
-        data: { dni: dni,
+        data: { id: id,
                 razon: razon, 
                 },
         success: function(data) {
