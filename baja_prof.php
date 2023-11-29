@@ -7,11 +7,12 @@ if (!isset($_POST['dni'])) {
 
 $dni = $_POST['dni'];
 $razon = $_POST['razon'];
+$tipo = "Profesor";
 
 if (empty($razon)) {
     echo 'vacio';
 } else {
-    $baja_sql = "INSERT INTO `bajas_prof`(`dni_prof`, `razon_baja`) VALUES ('$dni','$razon')";
+    $baja_sql = "INSERT INTO `bajas`(`dni`,`tipo`,`razon_baja`) VALUES ('$dni','$tipo','$razon')";
 
     if ($baja_response = mysqli_query($conn, $baja_sql)) {
         $del_sql = "DELETE FROM `profesores` WHERE dni_prof = $dni";
