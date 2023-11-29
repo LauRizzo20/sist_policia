@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 11:23:03
+-- Tiempo de generación: 29-11-2023 a las 14:34:42
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -42,7 +42,9 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`id_almn`, `dni_almn`, `nombre_almn`, `apellido_almn`, `sexo_almn`, `id_aula`, `condicion_almn`) VALUES
-(0, 45095322, 'Juan', 'Sánchez', 'M', 2, 0);
+(1, 45095322, 'Juan', 'Sánchez', 'M', 2, 0),
+(2, 47025610, 'Danilo', 'Simone', 'M', 3, 0),
+(3, 43618723, 'Claudia María', 'Gonzalez Soledad', 'F', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -85,7 +87,8 @@ CREATE TABLE `aula` (
 --
 
 INSERT INTO `aula` (`id_aula`, `nro_aula`) VALUES
-(2, 1);
+(2, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
@@ -99,6 +102,13 @@ CREATE TABLE `aula_asig` (
   `id_prof` int(11) NOT NULL,
   `cuatrimestre_asig` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `aula_asig`
+--
+
+INSERT INTO `aula_asig` (`id_aula`, `id_mat`, `id_prof`, `cuatrimestre_asig`) VALUES
+(2, 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -148,6 +158,26 @@ CREATE TABLE `fechas` (
   `inicio_fecha` varchar(40) NOT NULL,
   `final_fecha` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inasistencias`
+--
+
+CREATE TABLE `inasistencias` (
+  `dni_almn` int(11) NOT NULL,
+  `inasistencias_totales` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inasistencias`
+--
+
+INSERT INTO `inasistencias` (`dni_almn`, `inasistencias_totales`) VALUES
+(47025610, 70),
+(45095322, 75),
+(43618723, 55);
 
 -- --------------------------------------------------------
 
@@ -428,10 +458,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `id_almn` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `aula`
 --
 ALTER TABLE `aula`
-  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_aula` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `bajas`
