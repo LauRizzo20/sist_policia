@@ -84,11 +84,13 @@ include('db_config.php');
         <table class="table mt-3" style="margin-bottom: 150px" id="tablaAlumnos">
             <thead>
                 <tr>
+                    <th></th>
                     <th>DNI</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Sexo</th>
                     <th>Aula</th>
+                    <th>Inasistencias</th>
                 </tr>
             </thead>
             <tbody  id="tablaAlumnos">

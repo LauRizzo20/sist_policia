@@ -33,12 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result) {
         while ($row = mysqli_fetch_assoc($result)) {
             $aulaId = $row['id_aula'];
-
+        
             // Obtener el número de aula correspondiente a la ID de aula
             $query_aula = mysqli_query($conn, "SELECT nro_aula FROM aula WHERE id_aula = $aulaId");
             $row_aula = mysqli_fetch_assoc($query_aula);
             $nroAula = $row_aula['nro_aula'];
-
+        
             // Imprimir los datos (puedes ajustar esto según tu estructura de HTML)
             echo '<tr>';
             echo '<td>' . $row['dni_almn'] . '</td>';
@@ -46,7 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo '<td>' . $row['apellido_almn'] . '</td>';
             echo '<td>' . $row['sexo_almn'] . '</td>';
             echo '<td>' . $nroAula . '</td>';
+            echo '<td class="inasistencias-td">'; // Nueva celda para inasistencias
+            
+            // Lógica para obtener e imprimir las inasistencias
+            $dniAlumno = $row['dni_almn'];
+            $query_inasistencias = mysqli_query($conn, "SELECT inasistencias_totales FROM inasistencias WHERE dni_almn = $dniAlumno");
+            $row_inasistencias = mysqli_fetch_assoc($query_inasistencias);
+            $inasistencias = isset($row_inasistencias['inasistencias_totales']) ? $row_inasistencias['inasistencias_totales'] : 0;
+            
+            echo '<span class="inasistencias-text">' . $inasistencias . '</span>';
+            echo '</td>';
             echo '</tr>';
+            
         }
     } else {
         echo "Error en la consulta: " . mysqli_error($conn);

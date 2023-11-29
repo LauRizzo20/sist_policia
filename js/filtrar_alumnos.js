@@ -11,7 +11,8 @@ $(document).ready(function () {
 
                 $('#tablaAlumnos tbody tr').each(function () {
                     $(this).prepend('<td><input type="checkbox" class="alumno-checkbox" data-id="' + $(this).find('td:first-child').text() + '"></td>');
-                });
+                });                
+                
             },
             error: function (error) {
                 console.log(error);

@@ -14,7 +14,7 @@ include('session.php');
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_materias.php"><div class="w3-bar-item w3-button">Lista de materias</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="materia_notas.php"><div class="w3-bar-item w3-button">Cargar Notas</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="asignacion_form.php"><div class="w3-bar-item w3-button">Asignacion de aulas</div></a>
-
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="inasistencias_totales.php"><div class="w3-bar-item w3-button">Inasistencias Totales</div></a>
 
         </div>
     </div>
