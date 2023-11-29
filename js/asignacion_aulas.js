@@ -18,6 +18,7 @@ $(document).ready(function(){
                 success: function (data) {
                     if (data == 'exito') {
                         alert('Asignación guardada con éxito');
+                        window.location='lista_aulas.php';
                     } else {
                         alert(data);
                     };
