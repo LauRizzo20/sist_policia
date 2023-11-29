@@ -21,82 +21,89 @@ include("db_config.php");
     <div  style="margin-left:20%">
         <div class="display-4 d-flex justify-content-center h-100 align-items-center">Administracion de armas</div>
         <br>
+        <form method="post">
+            <label for="">Ingresar arma:</label>
+            <div class="form-row">
+            <div class="form-group col-md-3">
+                <label for="nroSerie">Número de Serie</label>
+                <input type="text" class="form-control" id="nroSerie" name="nroSerie" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="tipoArma">Tipo de Arma</label>
+                <input type="text" class="form-control" id="tipoArma" name="tipoArma" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="modeloArma">Modelo de Arma</label>
+                <input type="text" class="form-control" id="modeloArma" name="modeloArma" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="marcaArma">Marca de Arma</label>
+                <input type="text" class="form-control" id="marcaArma" name="marcaArma" required>
+            </div>
+            </div>
+            <button type="button" class="btn btn-primary" id="cargar">Cargar</button>
+        </form>
         <br>
-        <table class="table tab-pane fade in active" id="tab">
-    <thead>
-        <tr>
-            <th scope="col">Numero de serie</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Modelo</th>
-            <th scope="col">Marca</th>
-        </tr>
-    </thead>
-    <tbody>
+        <br>
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Numero de serie</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Marca</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
     <?php
-    $sql = "SELECT * FROM  `armas` WHERE 1";
-    $query = mysqli_query($conn, $sql);
+    $query = mysqli_query($conn, "SELECT * FROM `armas` WHERE 1");
 
-    while ($result = mysqli_fetch_array($query)) {
-        $nserie = $result['nroSerie_arma'];
-        $tipo = $result['tipo_arma'];
-        $modelo = $result['modelo_arma'];
-        $marca = $result['marca_arma'];
 
+    while ($row = mysqli_fetch_assoc($query)) {
+        $id = $row['nroSerie_arma'];
     ?>
-        <tr>
-            <td><input class="tabledit-input tabledit-identifier" type="hidden" name='id' value='<?php echo $nserie; ?>' disabled=""><?php echo $nserie; ?></td>
-            <td><input class="tabledit-input tabledit-identifier" type="hidden" name='tipo' value='<?php echo  $tipo; ?>' disabled=""><?php echo $tipo; ?></td>
-            <td><input class="tabledit-input tabledit-identifier" type="hidden" name='modelo' value='<?php echo $modelo; ?>' disabled=""><?php echo $modelo; ?></td>
-            <td><input class="tabledit-input tabledit-identifier" type="hidden" name='marca' value='<?php echo $marca; ?>' disabled=""><?php echo $marca; ?></td>
-        </tr>
+    <tr>
+      <td>
+        <?php echo $id?>
+      </td>
+      <td>
+        <?php echo $row['tipo_arma']?>
+      </td>
+      <td>
+        <?php echo $row['modelo_arma']?>
+      </td>
+      <td>
+        <?php echo $row['marca_arma']?>
+      </td>
+      <td>
+        <button id="<?php echo $id; ?>" value="<?php echo $id; ?>"  class="open btn btn-secondary">Editar</button>
+      </td>
+      <td>
+        <button class="eliminar btn btn-danger" id="<?php echo $id ?>" value="<?php echo $id ?>">Eliminar</button>
+      </td>
+    </tr>
     <?php
     };
     ?>
-    </tbody>
+  </tbody>
 </table>
+</div>
+    <!-- Modal info -->
+    <div class="modal" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content" id="modalContent">
+                
+            </div>
+        </div>
     </div>
-
-<script>
-    $('#tab').Tabledit({
-        url: 'editar_armas.php',
-        columns: {
-            identifier: [0, 'id'],
-            editable: [
-                [1, 'tipo'],
-                [2, 'modelo'],
-                [3, 'marca']
-            ]
-        },
-        onDraw: function() {
-            console.log('onDraw()');
-        },
-        onSuccess: function(data, textStatus, jqXHR) {
-            /*console.log('onSuccess(data, textStatus, jqXHR)');
-            console.log(data);
-            console.log(textStatus);
-            console.log(jqXHR);*/
-            //window.location.reload();
-        },
-        /*onFail: function(jqXHR, textStatus, errorThrown) {
-            console.log('onFail(jqXHR, textStatus, errorThrown)');
-            console.log(jqXHR);
-            console.log(textStatus);
-            console.log(errorThrown);
-        },
-        onAlways: function() {
-            console.log('onAlways()');
-          
-        },*/
-        onAjax: function(action, serialize) {
-            console.log('onAjax(action, serialize)');
-            console.log(action);
-            console.log(serialize);
-            //window.location.reload()
-        }
-    });
-</script>
-<script src="js/jquery.tabledit.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
+<script src="js/carga_arma.js"></script>
+<script src="js/eliminacion_arma.js"></script>
+<script src="js/modal_armas.js"></script>
+<script src="js/editar_arma.js"></script>
 </body>
 </html>
