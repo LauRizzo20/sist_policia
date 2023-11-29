@@ -1,28 +1,26 @@
 $(document).ready(function () {
-  // Manejar el clic en el botón de editar en la tabla
-  $(".table").on("click", ".btn-primary", function () {
+  // Manejar el envío del formulario de carga
+  $(".table").on("click", ".btn-success", function () {
     // Obtener el ID del registro seleccionado
     var idRegistro = $(this).data("id");
-
-    $("#formularioCarga").submit(function (e) {
+    console.log(idRegistro);
+    $("#formularioCargaNacimiento").submit(function (e) {
       e.preventDefault();
 
       // Obtener los datos del formulario
       var formData = {
         id_almn: idRegistro,
-        nom_analit: $("#nom_analit").val(),
-        tiltulo_analit: $("#tiltulo_analit").val(),
-        resolucion_analit: $("#resolucion_analit").val(),
-        escuela_analit: $("#escuela_analit").val(),
-        distrito_analit: $("#distrito_analit").val(),
-        observaciones_analit: $("#observaciones_analit").val(),
-        egreso_analit: $("#egreso_analit").val(),
+        fecha: $("#fecha").val(),
+        lugar: $("#lugar").val(),
+        grupo_sanguineo: $("#grupo_sanguineo").val(),
+        provincia: $("#provincia").val(),
+        pais: $("#pais").val(),
       };
 
       // Realizar la petición AJAX para cargar los datos en la base de datos
       $.ajax({
         type: "POST",
-        url: "form_titulo.php", // Debes crear este archivo para manejar la inserción en la base de datos
+        url: "form_nacimiento.php", // Debes crear este archivo para manejar la inserción en la base de datos
         data: formData,
         dataType: "json",
         success: function (response) {
@@ -31,12 +29,12 @@ $(document).ready(function () {
             Swal.fire({
               icon: "success",
               title: "¡Éxito!",
-              text: "Los datos del analitico se han guardado correctamente.",
+              text: "Los datos de nacimiento se han guardado correctamente.",
               confirmButtonText: "Aceptar",
             }).then((result) => {
               if (result.isConfirmed) {
                 // Limpiar el formulario
-                $("#formularioCarga")[0].reset();
+                $("#formularioCargaNacimiento")[0].reset();
               }
             });
           } else {

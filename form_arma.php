@@ -1,16 +1,14 @@
 <?php
+// Configuración de la conexión a la base de datos
 include('db_config.php');
+
 // Obtener datos del formulario
 $id_almn = $_POST["id_almn"];
-$fecha = $_POST["fecha"];
-$lugar = $_POST["lugar"];
-$grupo_sanguineo = $_POST["grupo_sanguineo"];
-$provincia = $_POST["provincia"];
-$pais = $_POST["pais"];
+$nroSerie_arma = $_POST["nroSerie_arma"];
 
 // Insertar datos en la base de datos
-$sql = "INSERT INTO nacimiento_almn (id_almn, fecha, lugar, grupo_sanguineo, provincia, pais) 
-        VALUES ('$id_almn', '$fecha', '$lugar', '$grupo_sanguineo', '$provincia', '$pais')";
+$sql = "INSERT INTO arma_asig (id_almn, nroSerie_arma) 
+        VALUES ('$id_almn', '$nroSerie_arma')";
 
 if ($conn->query($sql) === TRUE) {
     // Si la inserción fue exitosa, responder con un JSON indicando éxito
@@ -23,3 +21,7 @@ if ($conn->query($sql) === TRUE) {
 // Cerrar conexión
 $conn->close();
 ?>
+
+"<br />
+<b>Warning</b>:  Undefined array key "nroSerie_arma" in <b>C:\xampp\htdocs\sist_policia\form_arma.php</b> on line <b>7</b><br />
+{"status":"success"}"

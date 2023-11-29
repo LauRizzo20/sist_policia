@@ -2,15 +2,16 @@
 include('db_config.php');
 // Obtener datos del formulario
 $id_almn = $_POST["id_almn"];
-$fecha = $_POST["fecha"];
-$lugar = $_POST["lugar"];
-$grupo_sanguineo = $_POST["grupo_sanguineo"];
-$provincia = $_POST["provincia"];
-$pais = $_POST["pais"];
+$domicilio = $_POST["domicilio"];
+$localidad = $_POST["localidad"];
+$cp = $_POST["cp"];
+$comisaria = $_POST["comisaria"];
+$destino = $_POST["destino"];
+$telefono_dest = $_POST["telefono_dest"];
 
 // Insertar datos en la base de datos
-$sql = "INSERT INTO nacimiento_almn (id_almn, fecha, lugar, grupo_sanguineo, provincia, pais) 
-        VALUES ('$id_almn', '$fecha', '$lugar', '$grupo_sanguineo', '$provincia', '$pais')";
+$sql = "INSERT INTO destino_almn (id_almn, domicilio, localidad, cp, comisaria, destino, telefono_dest) 
+        VALUES ('$id_almn', '$domicilio', '$localidad', '$cp', '$comisaria', '$destino', '$telefono_dest')";
 
 if ($conn->query($sql) === TRUE) {
     // Si la inserción fue exitosa, responder con un JSON indicando éxito
