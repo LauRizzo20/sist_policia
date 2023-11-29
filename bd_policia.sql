@@ -9,26 +9,12 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE `alumnos` (
+  `id_almn` int(20) NOT NULL,
   `dni_almn` int(20) NOT NULL,
-  `nom_almn` text NOT NULL,
-  `apell_almn` text NOT NULL,
-  `sex_almn` varchar(1) NOT NULL,
-  `fdn_almn` date DEFAULT NULL,
-  `ldn_almn` text NOT NULL,
-  `email_almn` varchar(150) NOT NULL,
-  `telefono_almn` varchar(12) NOT NULL,
-  `cp_almn` int(4) NOT NULL,
-  `distrito_almn` varchar(150) NOT NULL,
-  `domicilio_almn` varchar(150) NOT NULL,
-  `compañia_almn` int(11) NOT NULL,
-  `legajo_almn` int(11) NOT NULL,
-  `destino_almn` varchar(150) NOT NULL,
-  `comisaria_almn` varchar(150) NOT NULL,
-  `secundario_almn` text NOT NULL,
-  `nacionalidad_almn` text NOT NULL,
-  `aula_almn` varchar(3) NOT NULL,
-  `arma_almn` varchar(40) NOT NULL,
-  `condicion_almn` varchar(30) NOT NULL
+  `nombre_almn` varchar(40) NOT NULL,
+  `apellido_almn` varchar(40) NOT NULL,
+  `id_aula` int(20) NOT NULL,
+  `condicion_almn` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `armas` (
@@ -36,6 +22,12 @@ CREATE TABLE `armas` (
   `tipo_arma` varchar(20) NOT NULL,
   `modelo_arma` varchar(20) NOT NULL,
   `marca_arma` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `arma_asig` (
+  `id` int(11) NOT NULL,
+  `nroSerie_arma` int(11) NOT NULL,
+  `id_almn` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `aula` (
@@ -50,10 +42,34 @@ CREATE TABLE `aula_asig` (
   `cuatrimestre_asig` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `bajas` (
+CREATE TABLE `bajas_almn` (
   `id_baja` int(11) NOT NULL,
   `dni_almn` int(8) NOT NULL,
   `razon_baja` varchar(1064) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `bajas_prof` (
+  `id_baja` int(11) NOT NULL,
+  `dni_prof` int(11) NOT NULL,
+  `razon_baja` varchar(1064) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `contacto_almn` (
+  `id_almn` int(20) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
+  `telefono_resp` varchar(12) NOT NULL,
+  `legajo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `destino_almn` (
+  `id_almn` int(20) NOT NULL,
+  `domicilio` varchar(150) NOT NULL,
+  `localidad` varchar(150) NOT NULL,
+  `cp` varchar(150) NOT NULL,
+  `comisaria` varchar(150) NOT NULL,
+  `destino` varchar(150) NOT NULL,
+  `telefono_dest` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `examenes` (
@@ -95,6 +111,23 @@ CREATE TABLE `materias` (
   `id_mat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `nacimiento_almn` (
+  `id_almn` int(20) NOT NULL,
+  `fecha` date DEFAULT NULL,
+  `lugar` text NOT NULL,
+  `grupo_sanguineo` varchar(50) NOT NULL,
+  `provincia` varchar(50) NOT NULL,
+  `pais` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `notas_almn` (
+  `id_almn` int(11) NOT NULL,
+  `id_notas` int(11) NOT NULL,
+  `id_mat` int(11) NOT NULL,
+  `tipo_nota` varchar(25) NOT NULL,
+  `nota` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 CREATE TABLE `profesores` (
   `id_prof` int(11) NOT NULL,
   `nombre_prof` varchar(20) NOT NULL,
@@ -103,7 +136,8 @@ CREATE TABLE `profesores` (
   `legajo_prof` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `secundario` (
+CREATE TABLE `secundario_almn` (
+  `id_almn` int(20) NOT NULL,
   `id_analit` int(11) NOT NULL,
   `nom_analit` varchar(50) NOT NULL,
   `tiltulo_analit` varchar(64) NOT NULL,
@@ -122,13 +156,16 @@ CREATE TABLE `user` (
 
 
 ALTER TABLE `alumnos`
-  ADD PRIMARY KEY (`dni_almn`),
-  ADD KEY `secundario` (`secundario_almn`(768)),
-  ADD KEY `aula_almn` (`aula_almn`),
-  ADD KEY `arma_almn` (`arma_almn`);
+  ADD PRIMARY KEY (`id_almn`),
+  ADD KEY `id_aula` (`id_aula`);
 
 ALTER TABLE `armas`
   ADD PRIMARY KEY (`nroSerie_arma`);
+
+ALTER TABLE `arma_asig`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nroSerie_arma` (`nroSerie_arma`),
+  ADD KEY `id_almn` (`id_almn`);
 
 ALTER TABLE `aula`
   ADD PRIMARY KEY (`id_aula`);
@@ -138,9 +175,18 @@ ALTER TABLE `aula_asig`
   ADD KEY `id_mat` (`id_mat`),
   ADD KEY `id_prof` (`id_prof`);
 
-ALTER TABLE `bajas`
+ALTER TABLE `bajas_almn`
   ADD PRIMARY KEY (`id_baja`),
   ADD KEY `dni_baja` (`dni_almn`);
+
+ALTER TABLE `bajas_prof`
+  ADD PRIMARY KEY (`id_baja`);
+
+ALTER TABLE `contacto_almn`
+  ADD KEY `id_almn` (`id_almn`);
+
+ALTER TABLE `destino_almn`
+  ADD KEY `id_almn` (`id_almn`);
 
 ALTER TABLE `examenes`
   ADD PRIMARY KEY (`id_exam`),
@@ -153,16 +199,26 @@ ALTER TABLE `fechas`
 ALTER TABLE `materias`
   ADD PRIMARY KEY (`id_mat`);
 
+ALTER TABLE `nacimiento_almn`
+  ADD KEY `id_almn` (`id_almn`);
+
+ALTER TABLE `notas_almn`
+  ADD PRIMARY KEY (`id_notas`),
+  ADD KEY `id_almn` (`id_almn`),
+  ADD KEY `id_mat` (`id_mat`);
+
 ALTER TABLE `profesores`
   ADD PRIMARY KEY (`id_prof`);
 
-ALTER TABLE `secundario`
-  ADD PRIMARY KEY (`id_analit`),
-  ADD KEY `nomApe` (`nom_analit`);
+ALTER TABLE `secundario_almn`
+  ADD KEY `id_almn` (`id_almn`);
 
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
+
+ALTER TABLE `bajas_prof`
+  MODIFY `id_baja` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `examenes`
   MODIFY `id_exam` int(11) NOT NULL AUTO_INCREMENT;
@@ -173,11 +229,11 @@ ALTER TABLE `fechas`
 ALTER TABLE `materias`
   MODIFY `id_mat` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `notas_almn`
+  MODIFY `id_notas` int(11) NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `profesores`
   MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `secundario`
-  MODIFY `id_analit` int(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
