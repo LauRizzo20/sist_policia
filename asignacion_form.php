@@ -24,6 +24,14 @@ include('db_config.php');
     <div style="margin-left:20%">
         <div id="tabla1">
         <div class="display-4 d-flex justify-content-center h-100 align-items-center">Asignacion de aulas</div>
+        <br>
+        <?php
+         if (isset($_GET['num'])) {
+            $nro_aula = $_GET['num'];
+            
+            echo "Aula a editar: " . $nro_aula . "";
+        }
+        ?>
   <br>
   <br>
   <div class="container mt-5">

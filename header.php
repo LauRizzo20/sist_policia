@@ -6,11 +6,14 @@ include('session.php');
 
         <div role="group" aria-label="Basic example" style="margin-top: 25%;">
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="dashboard.php"><div class="w3-bar-item w3-button">Lista de alumnos</div></a>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="ingresar_alumno.php"><div class="w3-bar-item w3-button">Carga de alumnos</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_armas.php"><div class="w3-bar-item w3-button">Lista de armas</div></a>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_profesores.php"><div class="w3-bar-item w3-button">Lista de profesores</div></a>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="carga_prof.php"><div class="w3-bar-item w3-button">Carga de profesores</div></a>
+            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_aulas.php"><div class="w3-bar-item w3-button">Lista de aulas</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="lista_materias.php"><div class="w3-bar-item w3-button">Lista de materias</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="materia_notas.php"><div class="w3-bar-item w3-button">Cargar Notas</div></a>
             <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="asignacion_form.php"><div class="w3-bar-item w3-button">Asignacion de aulas</div></a>
-            <a class="link-offset-2 link-underline link-underline-opacity-0 text-light" href="ingresar_alumno.php"><div class="w3-bar-item w3-button">Ingresar alumno</div></a>
 
 
         </div>
