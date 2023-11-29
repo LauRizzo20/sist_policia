@@ -16,6 +16,7 @@ if (isset($_GET['materia'])) {
     $query_nombre_mat = "SELECT nombre_mat FROM materias WHERE id_mat = '$idMat'";
     $result_nombre_mat = mysqli_query($conn, $query_nombre_mat);
 
+
     // Check if the query for fetching nombre_mat was successful
     if ($result_nombre_mat) {
         $row_nombre_mat = mysqli_fetch_assoc($result_nombre_mat);
@@ -35,11 +36,20 @@ if (isset($_GET['materia'])) {
         header("Location: materia_notas.php");
         exit();
     }
-} else {
+} else if (!isset($_GET['materia'])) {
     // Redirect or handle the case when id_mat is not provided
+    // For now, let's redirect to materia_notas.php
     header("Location: materia_notas.php");
     exit();
-}
+} else {
+    // Redirect or handle the case when id_mat is not provided
+
+    $row_nombre_mat = mysqli_fetch_assoc($result_nombre_mat);
+    $nombreMat = $row_nombre_mat['nombre_mat'];
+    $sql_alumnos = "SELECT dni_almn, nom_almn, apell_almn, sex_almn, aula_almn FROM alumnos";
+    $query_alumnos = mysqli_query($conn, $sql_alumnos);
+    
+} 
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +122,6 @@ if (isset($_GET['materia'])) {
                 <td>
                     <button class="verNotas btn btn-info" data-id="<?php echo $alumno['dni_almn']; ?>">Ver Notas</button>
                 </td>
-            </tr>
         <?php
         }
         ?>

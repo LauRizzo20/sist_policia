@@ -49,7 +49,6 @@ $(document).ready(function () {
     // Lógica para guardar los cambios en las notas
     $("#guardarCambios").click(function () {
         var dniAlumno = $(this).data('id');
-        var queryResponse = 0;
         // Recorremos las filas de la tabla para obtener las notas ingresadas
         $("#tablaNotas tr").each(function () {
             var tipoNota = $(this).find(".tipoNota").text();
@@ -63,8 +62,8 @@ $(document).ready(function () {
                     type: "POST",
                     url: "guardar_notas.php",
                     data: {
-                        dniAlumno: dniAlumno,
-                        idMat: idMat, 
+                        dniAlumno: dniAlumno, 
+                        idMat: idMat,  // Add this line to pass id_mat
                         tipoNota: tipoNota,
                         inputNota: inputNota,
                         inputComentario: inputComentario
@@ -73,12 +72,16 @@ $(document).ready(function () {
 
                     },
                     error: function () {
-
+                        // Puedes mostrar una alerta de éxito si lo deseas
+                        alert("Cambios guardados exitosamente.");
+                    },
+                    error: function () {
+                        alert("Error al guardar los cambios.");
                     }
                 });
             }
         });
-
+        // Cerramos el modal de notas después de guardar cambios
         $("#modalNotas").modal("hide");
     });
 });
