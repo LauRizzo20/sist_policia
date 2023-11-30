@@ -8,28 +8,28 @@ $(document).ready(function () {
             data: formData,
             success: function (data) {
                 if (data == "exito") {
-                    swal({
+                    Swal.fire({
                         icon: "success",
-                        title: "Materia registrada",
-                        timer: 1100,
-                        button: false
-                    }).then(function () {
-                        // Refrescar la página después de cerrar la alerta
-                        location.reload();
-                    });
+                        title: "¡Éxito!",
+                        text: "¡Materia registrada!",
+                        confirmButtonText: "Aceptar",
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.reload();
+                        }
+                      });
                 } else if (data == "vacio") {
-                    swal({
+                    Swal.fire({
                         icon: "error",
-                        text: "Rellene todos los campos.",
-                        timer: 1500,
-                        button: false
-                    });
+                        title: "Formulario vacio",
+                        text: "Rellene todos los campos",
+                      });
                 } else {
-                    swal({
+                    Swal.fire({
                         icon: "error",
-                        text: data,
-                        button: false
-                    });
+                        title: "Error",
+                        text: error,
+                      });
                 }
             },
             error: function (error) {

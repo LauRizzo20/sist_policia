@@ -55,12 +55,14 @@ $(document).ready(function () {
               title: "Analitico ya cargado",
               text: "Eliminelo o modifiquelo desde la tabla de alumnos",
             });
+            $("#formularioCarga")[0].reset();
           } else {
             Swal.fire({
               icon: "error",
               title: "Error",
               text: "Hubo un error al guardar los datos.",
             });
+            $("#formularioCarga")[0].reset();
           }
         },
         error: function (error) {
