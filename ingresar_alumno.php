@@ -79,8 +79,17 @@ include("db_config.php");
         </form>
         <br>
         <br>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <input type="text" class="form-control rounded col-md-3" id="searchDni" placeholder="Buscar por DNI">
+          <div class="col-md-1"></div>
+          <input type="text" class="form-control rounded col-md-3" id="searchNombre" placeholder="Buscar por Nombre">
+        </div>
 
-        <table class="table">
+        <br>
+        <br>
+
+        <table class="table" id="almnTable">
           <thead>
             <tr>
               <th>DNI</th>
@@ -327,6 +336,7 @@ include("db_config.php");
   <script src="js/ingresar_contacto.js"></script>
   <script src="js/ingresar_arma.js"></script>
   <script src="js/ingresar_destino.js"></script>
+  <script src="js/filtro_dniAlmn.js"></script>
 </body>
 
 </html>
