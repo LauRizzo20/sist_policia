@@ -3,6 +3,7 @@ $(document).ready(function(){
         var email = $("#email").val();
         var pass = $("#pass").val();
         var prof = $("#prof").val();
+        var cargo = $("#cargo").val();
 
         // Realiza la petición AJAX para agregar el profesor
         $.ajax({
@@ -10,10 +11,11 @@ $(document).ready(function(){
         url: "carga_user.php",  // Ajusta la URL a tu backend
         data: { email: email, 
                 pass: pass, 
-                prof: prof },
+                prof: prof,
+            cargo: cargo},
         success: function(data) {
             if (data == 'exito') {
-                alert('Profesor cargado');
+                alert('Usuario cargado');
                 location.reload();
             } else if (data == 'repetido') {
                 alert('Email o profesor repetidos');

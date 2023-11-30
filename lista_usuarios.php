@@ -41,9 +41,16 @@ include('db_config.php');
                             <input type="text" class="form-control" id="pass" name="pass" required>
                         </div>
                         <div class="form-group col-md-3">
+                            <label for="pass">Cargo:</label>
+                            <select class="escribir form-control" id="cargo" name="cargo" required>
+                                <option value="0">Administrador</option>
+                                <option value="1">Profesor</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
                             <label for="prof">Profesor (opcional):</label>
                             <select class="escribir form-control" id="prof" name="prof" required>
-                                <option value="0">Vacio</option>
+                                <option value="false">Vacio</option>
                                 <?php
                                 $queryC = "SELECT * FROM profesores WHERE condicion_prof = 0";
                                 $resultadoC = $conn->query($queryC);
@@ -55,7 +62,7 @@ include('db_config.php');
                         </div>
                     </div>
                     <div class="row">
-                        <button type="button" class="btn btn-primary" id="crear">Cargar</button>
+                        <button type="button" class="col-md-6 btn btn-primary" id="crear">Cargar</button>
                     </div>
                 </div>
             </form>
@@ -130,4 +137,5 @@ include('db_config.php');
 <script src="js/baja_user.js"></script>
 <script src="js/modal_user.js"></script>
 <script src="js/carga_user.js"></script>
+
 </html>

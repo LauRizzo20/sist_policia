@@ -5,16 +5,21 @@ include('db_config.php');
 $email = mysqli_real_escape_string($conn,$_POST["email"]);
 $pass = mysqli_real_escape_string($conn,$_POST["pass"]);
 $prof = mysqli_real_escape_string($conn,$_POST["prof"]);
+$cargo = mysqli_real_escape_string($conn,$_POST["cargo"]);
 
 if (empty($email) || empty($pass) || empty($prof)) {
     echo 'vacio';
 } else {
-    $check_query = "SELECT * FROM `user` WHERE email = '$email' OR id_prof = '$prof'";
+    if ($cargo == 1) {
+        $check_query = "SELECT * FROM `user` WHERE email = '$email' OR id_prof = '$prof'";
+    } else if ($cargo  == 0) {
+        $check_query = "SELECT * FROM `user` WHERE email = '$email'";
+    };
     $check_result = mysqli_query($conn, $check_query);
     $check_count = mysqli_num_rows($check_result);
     
     if ($check_count == 0) {
-        $sql = "INSERT INTO `user`(`email`, `password`, `id_prof`) VALUES ('$email','$pass','$prof')";
+        $sql = "INSERT INTO `user`(`email`, `password`, `cargo`, `id_prof`) VALUES ('$email','$pass','$cargo','$prof')";
     
         if ($conn->query($sql) === TRUE) {
     

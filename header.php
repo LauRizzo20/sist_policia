@@ -8,7 +8,7 @@ include('session.php');
             ?>
         <div role="group" aria-label="Basic example" style="margin-top: 25%;">
             <div class="d-flex justify-content-center">
-                <img src="img/icon.png" alt="logo" style="width: 45%;">
+                <img src="img/icon.png" alt="logo" style="width: 25%;">
             </div>
             <br>
             <a class="sideButtons d-flex align-items-center" href="dashboard.php">Lista de alumnos</a>
@@ -45,7 +45,9 @@ include('session.php');
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul style="margin-left: 80%;" class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <button type="button" href="logout.php" class="btn-header">Cerrar sesion</button>
+                    <a href="logout.php">
+                        <button type="button" class="btn-header">Cerrar sesion</button>
+                    </a>
                 </li>
             </ul>
         </div>
