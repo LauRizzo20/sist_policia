@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#formularioCarga").submit(function (e) {
       e.preventDefault();
 
-      // Obtener los datos del formulario
+      /*// Obtener los datos del formulario
       var formData = {
         id_almn: idRegistro,
         nom_analit: $("#nom_analit").val(),
@@ -18,12 +18,21 @@ $(document).ready(function () {
         observaciones_analit: $("#observaciones_analit").val(),
         egreso_analit: $("#egreso_analit").val(),
       };
-
+*/
       // Realizar la petición AJAX para cargar los datos en la base de datos
       $.ajax({
         type: "POST",
         url: "form_titulo.php", // Debes crear este archivo para manejar la inserción en la base de datos
-        data: formData,
+        data: {
+          id_almn: idRegistro,
+          nom_analit: $("#nom_analit").val(),
+          tiltulo_analit: $("#tiltulo_analit").val(),
+          resolucion_analit: $("#resolucion_analit").val(),
+          escuela_analit: $("#escuela_analit").val(),
+          distrito_analit: $("#distrito_analit").val(),
+          observaciones_analit: $("#observaciones_analit").val(),
+          egreso_analit: $("#egreso_analit").val(),
+        },
         dataType: "json",
         success: function (response) {
           if (response.status === "success") {

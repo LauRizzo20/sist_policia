@@ -30,13 +30,19 @@ function enviarFormulario() {
                   location.reload();
               }
           });
-      } else {
+      } else if(response.status === "repetido"){
           // Mostrar SweetAlert2 en caso de error
           Swal.fire({
               icon: 'error',
-              title: 'Error',
-              text: 'Hubo un error al guardar los datos.',
+              title: 'Alumno ya existente',
+              text: 'Este alumno ya esta ingresado en la base de datos',
           });
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al guardar los datos.',
+      });
       }
     },
     error: function(error) {
