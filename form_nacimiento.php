@@ -8,18 +8,24 @@ $grupo_sanguineo = $_POST["grupo_sanguineo"];
 $provincia = $_POST["provincia"];
 $pais = $_POST["pais"];
 
-// Insertar datos en la base de datos
-$sql = "INSERT INTO nacimiento_almn (id_almn, fecha, lugar, grupo_sanguineo, provincia, pais) 
-        VALUES ('$id_almn', '$fecha', '$lugar', '$grupo_sanguineo', '$provincia', '$pais')";
 
-if ($conn->query($sql) === TRUE) {
-    // Si la inserción fue exitosa, responder con un JSON indicando éxito
-    echo json_encode(["status" => "success"]);
+$sql = "SELECT * FROM nacimiento_almn WHERE id_almn = '$id_almn'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo json_encode(["status" => "repetido", "message" => $conn->error]);
 } else {
-    // Si hubo un error en la inserción, responder con un JSON indicando el error
-    echo json_encode(["status" => "error", "message" => $conn->error]);
-}
+    // Insertar datos en la base de datos
+    $sql = "INSERT INTO nacimiento_almn (id_almn, fecha, lugar, grupo_sanguineo, provincia, pais) 
+    VALUES ('$id_almn', '$fecha', '$lugar', '$grupo_sanguineo', '$provincia', '$pais')";
 
+    if ($conn->query($sql) === TRUE) {
+        // Si la inserción fue exitosa, responder con un JSON indicando éxito
+        echo json_encode(["status" => "success"]);
+    } else {
+        // Si hubo un error en la inserción, responder con un JSON indicando el error
+        echo json_encode(["status" => "error", "message" => $conn->error]);
+    }
+}
 // Cerrar conexión
 $conn->close();
-?>

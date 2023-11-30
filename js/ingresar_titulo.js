@@ -48,8 +48,14 @@ $(document).ready(function () {
                 $("#formularioCarga")[0].reset();
               }
             });
-          } else {
+          } else if (response.status === "repetido") {
             // Mostrar SweetAlert2 en caso de error
+            Swal.fire({
+              icon: "error",
+              title: "Analitico ya cargado",
+              text: "Eliminelo o modifiquelo desde la tabla de alumnos",
+            });
+          } else {
             Swal.fire({
               icon: "error",
               title: "Error",

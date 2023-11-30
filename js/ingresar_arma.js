@@ -32,8 +32,21 @@ $(document).ready(function () {
                   $("#formularioArmaAsig")[0].reset();
                 }
               });
-            } else {
+            } else if (response.status === "actualizado") {
               // Mostrar SweetAlert2 en caso de error
+              Swal.fire({
+                icon: "success",
+                title: "Arma actualizada",
+                text: "Los datos del arma se asignaron correctamente.",
+              });
+            } else if (response.status === "same") {
+              // Mostrar SweetAlert2 en caso de error
+              Swal.fire({
+                icon: "error",
+                title: "Misma arma",
+                text: "Estas asignando la misma arma que ya esta asignada",
+              });
+            }else {
               Swal.fire({
                 icon: "error",
                 title: "Error",
