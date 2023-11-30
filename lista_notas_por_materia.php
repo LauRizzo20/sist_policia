@@ -62,7 +62,7 @@ if (isset($_GET['materia'])) {
 <body>
     <?php include('header.php'); ?>
 
-    <div style="margin-left:20%">
+    <div style="margin-left:20%; margin-right: 5%; margin-bottom: 150px;">
     <div id="tabla1">
             <h2>Seleccione la materia para cargar las notas:</h2>
             <form action="lista_notas_por_materia.php" method="GET"> <!-- Change POST to GET -->
@@ -84,7 +84,7 @@ if (isset($_GET['materia'])) {
             </form>
         </div>
     <div class="container">
-        <h2><?php echo "Notas de la Materia: $nombreMat"; ?></h2>
+        <h2 id="notasMateria"><?php echo "Notas de la Materia: $nombreMat"; ?></h2>
 
         <table class="table tab-pane fade in active" id="tab">
     <thead>
@@ -126,6 +126,12 @@ if (isset($_GET['materia'])) {
     </tbody>
 </table>
     </div>
+
+    <div class="pull-right">
+            <button class="btn btn-info" id="generarPDF">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generar PDF
+            </button>    
+        </div>
     </div>
 
     <div class="modal" id="modalNotas" data-bs-backdrop="static" data-bs-keyboard="false">
@@ -159,5 +165,10 @@ if (isset($_GET['materia'])) {
     <script src="js/jquery.min.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/modal_notas.js"></script>
+
+    <!-- PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="pdf/pdf_notas.js"></script>
 </body>
 </html>
