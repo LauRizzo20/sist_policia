@@ -5,6 +5,10 @@ include('session.php');
 <div class="w3-sidebar w3-bar-block containerA" style="width: 15%;" id="mySidebar">
 
         <div role="group" aria-label="Basic example" style="margin-top: 25%;">
+            <div class="d-flex justify-content-center">
+                <img src="img/icon.png" alt="logo" style="width: 45%;">
+            </div>
+            <br>
             <a class="sideButtons d-flex align-items-center" href="dashboard.php">Lista de alumnos</a>
             <a class="sideButtons d-flex align-items-center" href="ingresar_alumno.php"><div>Carga de alumnos</div></a>
             <a class="sideButtons d-flex align-items-center" href="lista_armas.php"><div >Lista de armas</div></a>

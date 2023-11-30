@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sexo = isset($_POST['sexo']) ? mysqli_real_escape_string($conn, $_POST['sexo']) : '';
     $aulas = isset($_POST['aulas']) ? $_POST['aulas'] : array();
 
-    $sql = "SELECT * FROM alumnos WHERE 1";
+    $sql = "SELECT * FROM alumnos WHERE condicion_almn = 0";
 
     // Agregar condiciones de filtro según los valores proporcionados
     if (!empty($dni)) {

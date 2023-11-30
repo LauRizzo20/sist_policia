@@ -105,7 +105,7 @@ include("db_config.php");
           <tbody>
             <?php
             // Realiza la consulta para obtener los datos
-            $sql = "SELECT id_almn, dni_almn, nombre_almn, apellido_almn FROM alumnos";
+            $sql = "SELECT id_almn, dni_almn, nombre_almn, apellido_almn FROM alumnos WHERE condicion_almn = 0";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {

@@ -43,7 +43,7 @@ include('db_config.php');
     <br>
     <br><br>
     <div class="tab-buttons row">
-      <div class="col-md-1"></div>
+      
       <button class="col-md-1 btn btn-danger" onclick="changeTab('tabla0')">Datos basicos</button>
       <div class="col-md-1"></div>
       <button class="col-md-1 btn btn-primary" onclick="changeTab('tabla1')">Titulo</button>
@@ -53,6 +53,8 @@ include('db_config.php');
       <button class="col-md-1 btn btn-warning" onclick="changeTab('tabla3')">Contacto</button>
       <div class="col-md-1"></div>
       <button class="col-md-1 btn btn-info" onclick="changeTab('tabla4')">Destino</button>
+      <div class="col-md-1"></div>
+      <button class="col-md-1 btn btn-dark" onclick="changeTab('tabla5')">Bajas</button>
       <!-- Agrega más botones según sea necesario -->
     </div>
     <br><br>
@@ -76,7 +78,7 @@ include('db_config.php');
       </thead>
       <tbody>
         <?php
-        $sql_alumnos = "SELECT * FROM alumnos";
+        $sql_alumnos = "SELECT * FROM alumnos WHERE condicion_almn = 0";
 
         $result_alumnos = $conn->query($sql_alumnos);
 
@@ -87,15 +89,13 @@ include('db_config.php');
                         <td>" . $row['dni_almn'] . "</td>
                         <td>" . $row['nombre_almn'] . "</td>
                         <td>" . $row['apellido_almn'] . "</td>
-                        <td><button class='editar btn btn-warning' id='<?php echo " . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Editar</button></td>
-                        <td><button class='eliminar btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Dar de baja</button></td>
+                        <td><button class='editar btn btn-warning' id='editarAlumno' data-id='" . $row['dni_almn'] . "' value='" . $row['dni_almn'] . "'>Editar</button></td>
+                        <td><button class='eliminar btn btn-danger' id='bajarAlumno' data-id='" . $row['dni_almn'] . " ' value='" . $row['dni_almn'] . "'>Dar de baja</button></td>
                       </tr>";
           }
 
           echo "</table>";
-        } else {
-          echo "No se encontraron resultados.";
-        }
+        } 
 
 
         ?>
@@ -121,7 +121,7 @@ include('db_config.php');
       <tbody>
         <?php
         $sql_titulo = "SELECT  secundario_almn.*, alumnos.* FROM secundario_almn
-          LEFT JOIN alumnos ON secundario_almn.id_almn = alumnos.id_almn";
+          LEFT JOIN alumnos ON secundario_almn.id_almn = alumnos.id_almn WHERE alumnos.condicion_almn = 0";
 
         $result_titulo = $conn->query($sql_titulo);
 
@@ -140,13 +140,11 @@ include('db_config.php');
                         <td>" . $row['observaciones_analit'] . "</td>
                         <td>" . $row['egreso_analit'] . "</td>
                         <td><button class='editar btn btn-warning' id='<?php echo " . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Editar</button></td>
-                        <td><button class='eliminar btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de analitico</button></td>
+                        <td><button class='eliminarAnalitico btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de analitico</button></td>
                       </tr>";
           }
 
           echo "</table>";
-        } else {
-          echo "No se encontraron resultados.";
         }
 
 
@@ -171,7 +169,7 @@ include('db_config.php');
       <tbody>
         <?php
         $sql_nac = "SELECT nacimiento_almn.*, alumnos.* FROM nacimiento_almn
-          LEFT JOIN alumnos ON nacimiento_almn.id_almn = alumnos.id_almn";
+          LEFT JOIN alumnos ON nacimiento_almn.id_almn = alumnos.id_almn WHERE alumnos.condicion_almn = 0";
 
         $result_nac = $conn->query($sql_nac);
 
@@ -188,14 +186,12 @@ include('db_config.php');
                         <td>" . $row['provincia'] . "</td>
                         <td>" . $row['pais'] . "</td>
                         <td><button class='editar btn btn-warning' id='<?php echo " . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Editar</button></td>
-                        <td><button class='eliminar btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de nacimiento</button></td>
+                        <td><button class='eliminarNacimiento btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de nacimiento</button></td>
                       </tr>";
           }
 
           echo "</table>";
-        } else {
-          echo "No se encontraron resultados.";
-        }
+        } 
         ?>
       </tbody>
     </table>
@@ -216,7 +212,7 @@ include('db_config.php');
       <tbody>
         <?php
         $sql_contacto = "SELECT contacto_almn.*, alumnos.* FROM contacto_almn
-          LEFT JOIN alumnos ON contacto_almn.id_almn = alumnos.id_almn";
+          LEFT JOIN alumnos ON contacto_almn.id_almn = alumnos.id_almn WHERE alumnos.condicion_almn = 0";
 
         $result_contacto = $conn->query($sql_contacto);
 
@@ -232,14 +228,12 @@ include('db_config.php');
                         <td>" . $row['telefono_resp'] . "</td>
                         <td>" . $row['legajo'] . "</td>
                         <td><button class='editar btn btn-warning' id='<?php echo " . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Editar</button></td>
-                        <td><button class='eliminar btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de contacto</button></td>
+                        <td><button class='eliminarContacto btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de contacto</button></td>
                       </tr>";
           }
 
           echo "</table>";
-        } else {
-          echo "No se encontraron resultados.";
-        }
+        } 
         ?>
       </tbody>
     </table>
@@ -262,7 +256,7 @@ include('db_config.php');
       <tbody>
         <?php
         $sql_dest = "SELECT destino_almn.*, alumnos.* FROM destino_almn
-          LEFT JOIN alumnos ON destino_almn.id_almn = alumnos.id_almn";
+          LEFT JOIN alumnos ON destino_almn.id_almn = alumnos.id_almn WHERE alumnos.condicion_almn = 0";
 
         $result_dest = $conn->query($sql_dest);
 
@@ -280,14 +274,43 @@ include('db_config.php');
                         <td>" . $row['destino'] . "</td>
                         <td>" . $row['telefono_dest'] . "</td>
                         <td><button class='editar btn btn-warning' id='<?php echo " . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Editar</button></td>
-                        <td><button class='eliminar btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de destino</button></td>
+                        <td><button class='eliminarTitulo btn btn-danger' id='<?php echo $" . $row['dni_almn'] . " ?>' value='<?php echo " . $row['dni_almn'] . " ?>'>Borrar datos de destino</button></td>
                       </tr>";
           }
 
           echo "</table>";
-        } else {
-          echo "No se encontraron resultados.";
-        }
+        } 
+        ?>
+      </tbody>
+    </table>
+    <table id="tabla5" class="table tab-content">
+      <thead>
+        <tr>
+        <th scope="col">DNI</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Restaurar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $sql_bajas = "SELECT * FROM alumnos WHERE condicion_almn = 1";
+
+        $result_bajas = $conn->query($sql_bajas);
+
+        if ($result_bajas->num_rows > 0) {
+          // Mostrar datos en la tabla
+          while ($row = $result_bajas->fetch_assoc()) {
+            echo "<tr>
+                        <td>" . $row['dni_almn'] . "</td>
+                        <td>" . $row['nombre_almn'] . "</td>
+                        <td>" . $row['apellido_almn'] . "</td>
+                        <td><button class='restaurar btn btn-success' data-id='" . $row['dni_almn'] . "' value='" . $row['dni_almn'] . "'>Restaurar</button></td>
+                      </tr>";
+          }
+
+          echo "</table>";
+        } 
         ?>
       </tbody>
     </table>
@@ -308,7 +331,7 @@ include('db_config.php');
 </body>
 <script src="js/jquery.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
-<script src="js/eliminar.js"></script>
 <script src="js/filtro_dniAlmn2.js"></script>
+<script src="js/baja_alumno.js"></script>
 
 </html>

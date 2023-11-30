@@ -23,7 +23,7 @@ if (isset($_GET['materia'])) {
         // Check if the fetched row is not null and 'nombre_mat' is set
         if ($row_nombre_mat && isset($row_nombre_mat['nombre_mat'])) {
             $nombreMat = $row_nombre_mat['nombre_mat'];
-            $sql_alumnos = "SELECT dni_almn, nombre_almn, apellido_almn, sexo_almn, id_aula FROM alumnos";
+            $sql_alumnos = "SELECT dni_almn, nombre_almn, apellido_almn, sexo_almn, id_aula FROM alumnos WHERE condicion_almn = 0";
             $query_alumnos = mysqli_query($conn, $sql_alumnos);
         } else {
             // Redirect if nombre_mat is not available
