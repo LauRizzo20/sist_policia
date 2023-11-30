@@ -17,7 +17,7 @@ if (isset($_POST['id'])) {
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" id="<?php echo $row['dni_prof']; ?>" class="baja btn btn-danger">Listo</button>
+        <button type="button" id="<?php echo $row['id_prof']; ?>" class="baja btn btn-danger">Listo</button>
       </div>
        <?php
         

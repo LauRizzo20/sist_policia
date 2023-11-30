@@ -15,8 +15,6 @@ $count = mysqli_num_rows($result);
 if($count == 1) {
     echo 'exito';
     $_SESSION['id'] = $row['id'];
-    
-
  }else {
     echo "error";
  }

@@ -39,7 +39,7 @@ include('db_config.php');
   </thead>
   <tbody>
     <?php
-    $query = mysqli_query($conn, "SELECT * FROM `profesores` WHERE 1");
+    $query = mysqli_query($conn, "SELECT * FROM `profesores` WHERE condicion_prof = 0");
 
 
     while ($row = mysqli_fetch_assoc($query)) {
