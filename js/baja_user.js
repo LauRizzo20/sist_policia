@@ -1,20 +1,16 @@
 $(document).ready(function(){
-    $(document).on("click", ".baja", function(){
+    $(document).on("click", ".eliminar", function(){
         let id = $(this).attr("id");
-        var razon = $("#razon").val();
 
         $.ajax({
         type: "POST",
-        url: "baja_prof.php",  
-        data: { id: id,
-                razon: razon, 
+        url: "baja_user.php",  
+        data: { id: id, 
                 },
         success: function(data) {
             if (data == 'exito') {
                 alert('Baja exitosa');
                 location.reload();
-            } else if (data == 'vacio') {
-                alert('Indique la razon de la baja');
             }else {
                 alert(data);
             };

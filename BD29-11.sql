@@ -1,11 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
+<<<<<<<< HEAD:BD29-11.sql
 -- Tiempo de generación: 29-11-2023 a las 14:34:42
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
+========
+-- Tiempo de generación: 29-11-2023 a las 18:41:45
+-- Versión del servidor: 10.4.18-MariaDB
+-- Versión de PHP: 8.0.3
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +41,11 @@ CREATE TABLE `alumnos` (
   `sexo_almn` varchar(1) NOT NULL,
   `id_aula` int(20) DEFAULT NULL,
   `condicion_almn` int(1) NOT NULL
+<<<<<<<< HEAD:BD29-11.sql
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+========
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 --
 -- Volcado de datos para la tabla `alumnos`
@@ -57,7 +67,30 @@ CREATE TABLE `armas` (
   `tipo_arma` varchar(20) NOT NULL,
   `modelo_arma` varchar(20) NOT NULL,
   `marca_arma` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `armas`
+--
+
+INSERT INTO `armas` (`nroSerie_arma`, `tipo_arma`, `modelo_arma`, `marca_arma`) VALUES
+(1, 'Pistola', 'Glock 17', 'Glock'),
+(2, 'Rifle', 'AR-15', 'Colt'),
+(3, 'Escopeta', 'Mossberg 500', 'Mossberg'),
+(4, 'Subfusil', 'MP5', 'Heckler & Koch'),
+(5, 'Revólver', 'Smith & Wesson 686', 'Smith & Wesson');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `arma_asig`
+--
+
+CREATE TABLE `arma_asig` (
+  `id` int(11) NOT NULL,
+  `nroSerie_arma` int(11) NOT NULL,
+  `id_almn` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -80,7 +113,15 @@ CREATE TABLE `arma_asig` (
 CREATE TABLE `aula` (
   `id_aula` int(11) NOT NULL,
   `nro_aula` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `aula`
+--
+
+INSERT INTO `aula` (`id_aula`, `nro_aula`) VALUES
+(2, 1),
+(3, 2);
 
 --
 -- Volcado de datos para la tabla `aula`
@@ -101,7 +142,14 @@ CREATE TABLE `aula_asig` (
   `id_mat` int(11) NOT NULL,
   `id_prof` int(11) NOT NULL,
   `cuatrimestre_asig` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `aula_asig`
+--
+
+INSERT INTO `aula_asig` (`id_aula`, `id_mat`, `id_prof`, `cuatrimestre_asig`) VALUES
+(2, 0, 3, 1);
 
 --
 -- Volcado de datos para la tabla `aula_asig`
@@ -121,7 +169,45 @@ CREATE TABLE `bajas` (
   `dni` int(8) NOT NULL,
   `tipo` varchar(255) NOT NULL,
   `razon_baja` varchar(1064) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bajas`
+--
+
+INSERT INTO `bajas` (`id_baja`, `dni`, `tipo`, `razon_baja`) VALUES
+(1, 45454545, 'Profesor', 'TEST'),
+(2, 89898989, 'Profesor', 'XD');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contacto_almn`
+--
+
+CREATE TABLE `contacto_almn` (
+  `id_almn` int(20) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `telefono` varchar(12) NOT NULL,
+  `telefono_resp` varchar(12) NOT NULL,
+  `legajo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `destino_almn`
+--
+
+CREATE TABLE `destino_almn` (
+  `id_almn` int(20) NOT NULL,
+  `domicilio` varchar(150) NOT NULL,
+  `localidad` varchar(150) NOT NULL,
+  `cp` varchar(150) NOT NULL,
+  `comisaria` varchar(150) NOT NULL,
+  `destino` varchar(150) NOT NULL,
+  `telefono_dest` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bajas`
@@ -144,7 +230,7 @@ CREATE TABLE `examenes` (
   `tipo_exam` varchar(50) NOT NULL,
   `nota_exam` int(11) NOT NULL,
   `fecha_exam` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -157,7 +243,27 @@ CREATE TABLE `fechas` (
   `cuatrimestre_fecha` varchar(40) NOT NULL,
   `inicio_fecha` varchar(40) NOT NULL,
   `final_fecha` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `inasistencias`
+--
+
+CREATE TABLE `inasistencias` (
+  `dni_almn` int(11) NOT NULL,
+  `inasistencias_totales` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `inasistencias`
+--
+
+INSERT INTO `inasistencias` (`dni_almn`, `inasistencias_totales`) VALUES
+(47025610, 70),
+(45095322, 75),
+(43618723, 55);
 
 -- --------------------------------------------------------
 
@@ -191,15 +297,21 @@ CREATE TABLE `logs_cambios` (
   `fecha_cambio` date NOT NULL,
   `razon_cambio` varchar(1064) NOT NULL,
   `detalles_cambio` varchar(1064) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `logs_cambios`
 --
 
 INSERT INTO `logs_cambios` (`nombre_tab`, `id_log`, `fecha_cambio`, `razon_cambio`, `detalles_cambio`) VALUES
+<<<<<<<< HEAD:BD29-11.sql
 ('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE'),
 ('materias', 0, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Derecho Penal. \nCarga Horaria: 200. \nCurrícula: ANUAL');
+========
+('materias', 1, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ÚNICA AL FINAL \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE'),
+('materias', 2, '2023-11-29', 'Actualización de materia', 'Detalles antes del cambio: \nID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: PROMOCIONABLE \n\nDetalles después del cambio: \nID: 0. \nNombre de Materia: Derecho Penal. \nCarga Horaria: 200. \nCurrícula: ANUAL'),
+('profesores', 5, '2023-11-29', 'Actualización de profesor', 'Detalles antes del cambio: \nID: 3. \nNombre del profesor: Mauricio Gonzalez. \nDNI: 14676842. \nNro legajo: 129324 \n\nDetalles después del cambio: \nID: 3. \nNombre del profesor: Mauricio Gonzalez. \nDNI: 14676842. Nro legajo: 129324');
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 -- --------------------------------------------------------
 
@@ -213,15 +325,20 @@ CREATE TABLE `logs_creacion` (
   `fecha_creacion` date NOT NULL,
   `razon_creacion` varchar(1064) NOT NULL,
   `detalles_creacion` varchar(1064) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `logs_creacion`
 --
 
 INSERT INTO `logs_creacion` (`nombre_tab`, `id_log`, `fecha_creacion`, `razon_creacion`, `detalles_creacion`) VALUES
+<<<<<<<< HEAD:BD29-11.sql
 ('materias', 0, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ANUAL'),
 ('materias', 0, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ÚNICA AL FINAL');
+========
+('materias', 1, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ANUAL'),
+('materias', 2, '2023-11-29', 'Creación de materia', 'Nombre de Materia: Santiago \nCarga Horaria: 69 \nCurrícula: ÚNICA AL FINAL');
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 -- --------------------------------------------------------
 
@@ -235,14 +352,19 @@ CREATE TABLE `logs_eliminacion` (
   `fecha_delete` date NOT NULL,
   `razon_delete` varchar(1064) NOT NULL,
   `detalles_delete` varchar(1064) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `logs_eliminacion`
 --
 
 INSERT INTO `logs_eliminacion` (`nombre_tab`, `id_log`, `fecha_delete`, `razon_delete`, `detalles_delete`) VALUES
+<<<<<<<< HEAD:BD29-11.sql
 ('materias', 0, '2023-11-29', 'ME EQUIVOQUE PERDON', 'ID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ANUAL');
+========
+('materias', 1, '2023-11-29', 'ME EQUIVOQUE PERDON', 'ID: 0. \nNombre de Materia: Santiago. \nCarga Horaria: 69. \nCurrícula: ANUAL'),
+('profesores', 3, '2023-11-29', 'dispararse en la pierna', 'ID: 4. \nNombre del profesor: Mario Renaldi. \nDNI: 11111111. \nNro legajo: 3214');
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 -- --------------------------------------------------------
 
@@ -255,7 +377,7 @@ CREATE TABLE `materias` (
   `id_mat` int(11) NOT NULL,
   `c_horaria_mat` varchar(255) NOT NULL,
   `curricula_mat` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `materias`
@@ -277,7 +399,11 @@ CREATE TABLE `nacimiento_almn` (
   `grupo_sanguineo` varchar(50) NOT NULL,
   `provincia` varchar(50) NOT NULL,
   `pais` varchar(50) NOT NULL
+<<<<<<<< HEAD:BD29-11.sql
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+========
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 -- --------------------------------------------------------
 
@@ -293,7 +419,7 @@ CREATE TABLE `notas` (
   `num_nota` int(11) NOT NULL,
   `fecha_nota` date NOT NULL,
   `comentario_nota` varchar(1064) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `notas`
@@ -316,8 +442,17 @@ CREATE TABLE `profesores` (
   `nombre_prof` varchar(20) NOT NULL,
   `apellido_prof` varchar(20) NOT NULL,
   `dni_prof` int(8) NOT NULL,
-  `legajo_prof` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `legajo_prof` int(10) NOT NULL,
+  `condicion_prof` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `profesores`
+--
+
+INSERT INTO `profesores` (`id_prof`, `nombre_prof`, `apellido_prof`, `dni_prof`, `legajo_prof`, `condicion_prof`) VALUES
+(3, 'Mauricio', 'Gonzalez', 14676842, 129324, 0),
+(4, 'Mario', 'Renaldi', 11111111, 3214, 1);
 
 --
 -- Volcado de datos para la tabla `profesores`
@@ -342,7 +477,7 @@ CREATE TABLE `secundario_almn` (
   `distrito_analit` varchar(60) NOT NULL,
   `observaciones_analit` varchar(1024) NOT NULL,
   `egreso_analit` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -354,7 +489,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `email` varchar(150) NOT NULL,
   `password` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `user`
@@ -408,6 +543,21 @@ ALTER TABLE `aula_asig`
 ALTER TABLE `bajas`
   ADD PRIMARY KEY (`id_baja`),
   ADD KEY `dni_baja` (`dni`);
+<<<<<<<< HEAD:BD29-11.sql
+========
+
+--
+-- Indices de la tabla `contacto_almn`
+--
+ALTER TABLE `contacto_almn`
+  ADD KEY `id_almn` (`id_almn`);
+
+--
+-- Indices de la tabla `destino_almn`
+--
+ALTER TABLE `destino_almn`
+  ADD KEY `id_almn` (`id_almn`);
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 --
 -- Indices de la tabla `examenes`
@@ -426,6 +576,27 @@ ALTER TABLE `fechas`
 --
 -- Indices de la tabla `nacimiento_almn`
 --
+<<<<<<<< HEAD:BD29-11.sql
+========
+ALTER TABLE `logs_cambios`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indices de la tabla `logs_creacion`
+--
+ALTER TABLE `logs_creacion`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indices de la tabla `logs_eliminacion`
+--
+ALTER TABLE `logs_eliminacion`
+  ADD PRIMARY KEY (`id_log`);
+
+--
+-- Indices de la tabla `nacimiento_almn`
+--
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 ALTER TABLE `nacimiento_almn`
   ADD KEY `id_almn` (`id_almn`);
 
@@ -488,6 +659,27 @@ ALTER TABLE `fechas`
   MODIFY `id_fecha` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+<<<<<<<< HEAD:BD29-11.sql
+========
+-- AUTO_INCREMENT de la tabla `logs_cambios`
+--
+ALTER TABLE `logs_cambios`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `logs_creacion`
+--
+ALTER TABLE `logs_creacion`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `logs_eliminacion`
+--
+ALTER TABLE `logs_eliminacion`
+  MODIFY `id_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 -- AUTO_INCREMENT de la tabla `notas`
 --
 ALTER TABLE `notas`
@@ -497,7 +689,11 @@ ALTER TABLE `notas`
 -- AUTO_INCREMENT de la tabla `profesores`
 --
 ALTER TABLE `profesores`
+<<<<<<<< HEAD:BD29-11.sql
   MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+========
+  MODIFY `id_prof` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>>> 180a9cf52775d622c3e59967de757ced4b32d4b9:policia.sql
 
 --
 -- AUTO_INCREMENT de la tabla `user`

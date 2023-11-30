@@ -21,10 +21,17 @@ if ($verificar_result->num_rows > 0) {
 // Preparar la consulta SQL
 $sql = "INSERT INTO `aula`(`nro_aula`) VALUES ('$nro')";
 
-$result = mysqli_query($conn, $sql);
+
 // Verificar si la consulta SQL se realizó correctamente
-if ($result) {
-    echo "exito";
+if ($conn->query($sql) === TRUE) {
+    $details = "Aula numero: {$nro}";
+            
+    $log_creacion_query = "INSERT INTO `logs_creacion` (nombre_tab, fecha_creacion, razon_creacion, detalles_creacion) VALUES ('aula', NOW(), 'Creacion de aula', '$details')";
+                if ($conn->query($log_creacion_query) === TRUE) {
+                    echo "exito"; 
+                } else {
+                    echo "errorLogs";
+                };
 } else {
     echo $sql;
 }

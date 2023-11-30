@@ -64,7 +64,7 @@ include('db_config.php');
                 <label for="prof">Profesor:</label>
                 <select class="escribir form-control" id="prof" name="prof" required>
                     <?php
-                    $queryC = "SELECT * FROM profesores";
+                    $queryC = "SELECT * FROM profesores WHERE condicion_prof = 0";
                     $resultadoC = $conn->query($queryC);
                     while ($prof = $resultadoC->fetch_assoc()) {
                         echo "<option value='" . $prof['id_prof'] . "'>" . $prof['nombre_prof'] ." " . $prof['apellido_prof'] .  "</option>";

@@ -1,9 +1,11 @@
-
 <?php
 include('session.php');
 ?>
 <div class="w3-sidebar w3-bar-block containerA" style="width: 15%;" id="mySidebar">
 
+        <?php
+        if ($cargo == 0) {
+            ?>
         <div role="group" aria-label="Basic example" style="margin-top: 25%;">
             <div class="d-flex justify-content-center">
                 <img src="img/icon.png" alt="logo" style="width: 45%;">
@@ -19,7 +21,21 @@ include('session.php');
             <a class="sideButtons d-flex align-items-center" href="materia_notas.php"><div>Cargar Notas</div></a>
             <a class="sideButtons d-flex align-items-center" href="asignacion_form.php"><div>Asignacion de aulas</div></a>
             <a class="sideButtons d-flex align-items-center" href="inasistencias_totales.php"><div>Inasistencias Totales</div></a>
+            <a class="sideButtons d-flex align-items-center" href="lista_usuarios.php"><div>Usuarios Activos</div></a>
         </div>
+            <?php
+        } else {
+            ?>
+            <div role="group" aria-label="Basic example" style="margin-top: 25%;">
+
+            </div>
+
+            <?php
+        }
+        
+        
+        
+        ?>
     </div>
 
     <nav class="navbar navbar-expand-sm navbar-light navbarA">

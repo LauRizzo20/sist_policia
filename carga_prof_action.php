@@ -17,7 +17,17 @@ if (empty($nombre) || empty($apellido) || empty($dni) || empty($legajo)) {
         $sql = "INSERT INTO profesores (nombre_prof, apellido_prof, dni_prof, legajo_prof) VALUES ('$nombre', '$apellido', '$dni', '$legajo')";
     
         if ($conn->query($sql) === TRUE) {
-            echo "exito";
+            $nombre_comp = $nombre.' '.$apellido;
+    
+    
+            $details = "Nombre del profesor: {$nombre_comp}. \nDNI: {$dni}. \nNro legajo: {$legajo}";
+            
+            $log_creacion_query = "INSERT INTO `logs_creacion` (nombre_tab, fecha_creacion, razon_creacion, detalles_creacion) VALUES ('profesores', NOW(), 'Carga de profesor', '$details')";
+                        if ($conn->query($log_creacion_query) === TRUE) {
+                            echo "exito"; 
+                        } else {
+                            echo "errorLogs";
+                        };
         } else {
             echo "errorInsert";
         };
