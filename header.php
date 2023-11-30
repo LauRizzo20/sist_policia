@@ -15,7 +15,6 @@ include('session.php');
             <a class="sideButtons d-flex align-items-center" href="materia_notas.php"><div>Cargar Notas</div></a>
             <a class="sideButtons d-flex align-items-center" href="asignacion_form.php"><div>Asignacion de aulas</div></a>
             <a class="sideButtons d-flex align-items-center" href="inasistencias_totales.php"><div>Inasistencias Totales</div></a>
-
         </div>
     </div>
 

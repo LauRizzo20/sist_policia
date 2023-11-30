@@ -1,22 +1,25 @@
 <?php
 include('db_config.php');
-
 // Obtener datos del formulario
-$dni = $_POST["dni"];
-$nombre = $_POST["nombre"];
-$apellido = $_POST["apellido"];
-$aula = $_POST["aula"];
+$id_almn = $_POST["id_almn"];
+$fecha = $_POST["fecha"];
+$lugar = $_POST["lugar"];
+$grupo_sanguineo = $_POST["grupo_sanguineo"];
+$provincia = $_POST["provincia"];
+$pais = $_POST["pais"];
 
-$sql = "SELECT * FROM alumnos WHERE dni_almn = '$dni'";
+
+$sql = "SELECT * FROM nacimiento_almn WHERE id_almn = '$id_almn'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo json_encode(["status" => "repetido", "message" => $conn->error]);
 } else {
     // Insertar datos en la base de datos
-    $sql_insert = "INSERT INTO alumnos (dni_almn, nombre_almn, apellido_almn, id_aula) VALUES ('$dni', '$nombre', '$apellido', '$aula')";
+    $sql = "INSERT INTO nacimiento_almn (id_almn, fecha, lugar, grupo_sanguineo, provincia, pais) 
+    VALUES ('$id_almn', '$fecha', '$lugar', '$grupo_sanguineo', '$provincia', '$pais')";
 
-    if ($conn->query($sql_insert) === TRUE) {
+    if ($conn->query($sql) === TRUE) {
         // Si la inserción fue exitosa, responder con un JSON indicando éxito
         echo json_encode(["status" => "success"]);
     } else {
@@ -24,6 +27,5 @@ if ($result->num_rows > 0) {
         echo json_encode(["status" => "error", "message" => $conn->error]);
     }
 }
-
 // Cerrar conexión
 $conn->close();

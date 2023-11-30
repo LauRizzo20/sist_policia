@@ -1,20 +1,26 @@
 <?php
+// Configuración de la conexión a la base de datos
 include('db_config.php');
 
 // Obtener datos del formulario
-$dni = $_POST["dni"];
-$nombre = $_POST["nombre"];
-$apellido = $_POST["apellido"];
-$aula = $_POST["aula"];
+$id_almn = $_POST["id_almn"];
+$email = $_POST["email"];
+$telefono = $_POST["telefono"];
+$telefono_resp = $_POST["telefono_resp"];
+$legajo = $_POST["legajo"];
 
-$sql = "SELECT * FROM alumnos WHERE dni_almn = '$dni'";
+
+
+$sql = "SELECT * FROM contacto_almn WHERE id_almn = '$id_almn'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     echo json_encode(["status" => "repetido", "message" => $conn->error]);
 } else {
     // Insertar datos en la base de datos
-    $sql_insert = "INSERT INTO alumnos (dni_almn, nombre_almn, apellido_almn, id_aula) VALUES ('$dni', '$nombre', '$apellido', '$aula')";
+    // Insertar datos en la base de datos
+    $sql_insert = "INSERT INTO contacto_almn (id_almn, email, telefono, telefono_resp, legajo) 
+        VALUES ('$id_almn', '$email', '$telefono', '$telefono_resp', '$legajo')";
 
     if ($conn->query($sql_insert) === TRUE) {
         // Si la inserción fue exitosa, responder con un JSON indicando éxito
