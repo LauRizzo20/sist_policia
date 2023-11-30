@@ -4,12 +4,6 @@ include('db_config.php');
 if (isset($_GET['alumnosSeleccionados'])) {
     // Obtiene los datos de la URL
     $alumnosSeleccionados = json_decode($_GET['alumnosSeleccionados'], true);
-
-    // Puedes imprimir los datos para verificar
-    // print_r($alumnosSeleccionados);
-
-    // Ahora, puedes utilizar los datos para cargar la tabla de inasistencias
-    // TODO: Implementa la lógica para cargar la tabla
 } else {
     // Si no se recibieron datos, muestra un mensaje o realiza la lógica necesaria
     echo 'No se recibieron datos de alumnos seleccionados.';

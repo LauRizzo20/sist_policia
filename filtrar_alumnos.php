@@ -28,6 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql .= " AND id_aula IN ($aulasString)";
     }
 
+    // Agregar la cláusula ORDER BY para ordenar por dni_almn
+    $sql .= " ORDER BY dni_almn";
+
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

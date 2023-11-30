@@ -20,7 +20,7 @@ include('db_config.php');
 <body>
     <?php include('header.php'); ?>
 
-    <div style="margin-left:20%; margin-right: 5%;">
+    <div style="margin-left:20%; margin-right: 5%; margin-bottom: 150px;">
         <h2>Inasistencias Totales</h2>
         <div class="row">
     <!-- Filtrar por DNI -->
@@ -81,7 +81,7 @@ include('db_config.php');
             <button class="btn btn-success" id="cargarInasistencias">Cargar Inasistencias de Alumnos Seleccionados</button>
         </div>
 
-        <table class="table mt-3" style="margin-bottom: 150px" id="tablaAlumnos">
+        <table class="table mt-3" id="tablaAlumnos">
             <thead>
                 <tr>
                     <th></th>
@@ -97,11 +97,22 @@ include('db_config.php');
                 <!-- Contenido de la tabla cargado dinámicamente con jQuery -->
             </tbody>
         </table>
+
+        <div class="pull-right">
+            <button class="btn btn-info" id="generarPDF">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generar PDF
+            </button>    
+        </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/filtrar_alumnos.js"></script>
+
+    <!-- PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="pdf/pdf_inasistencias.js"></script>
 </body>
 
 </html>

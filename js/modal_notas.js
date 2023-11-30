@@ -80,5 +80,6 @@ $(document).ready(function () {
         });
 
         $("#modalNotas").modal("hide");
+        location.reload();
     });
 });

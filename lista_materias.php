@@ -19,7 +19,7 @@ include("db_config.php");
     <?php
     include("header.php");
     ?>
-    <div  style="margin-left:20%">
+    <div  style="margin-left:20%; margin-right: 5%; margin-bottom: 150px;">
         <div class="display-4 d-flex justify-content-center h-100 align-items-center">Administracion de materias</div>
         <br>
         <br>
@@ -63,13 +63,13 @@ include("db_config.php");
                 <?php
                 $sql = "SELECT * FROM `materias`";
                 $query = mysqli_query($conn, $sql);
+                $position = 1;
 
                 while ($result = mysqli_fetch_array($query)) {
                     $idMateria = $result['id_mat'];
                     $nombreMateria = $result['nombre_mat'];
                     $cargaHoraria = $result['c_horaria_mat'];
                     $curricula = $result['curricula_mat'];
-                    $position = 1;
                 ?>
                     <tr>
                         <td><input type="hidden" name='id' value='<?php echo $idMateria; ?>' disabled=""><?php echo $position++; ?></td>
@@ -88,6 +88,12 @@ include("db_config.php");
                 ?>
             </tbody>
         </table>
+
+        <div class="pull-right">
+            <button class="btn btn-info" id="generarPDF">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generar PDF
+            </button>    
+        </div>
     </div>
 
     <!-- Modal info -->
@@ -105,5 +111,10 @@ include("db_config.php");
     <script src="js/editar_materia.js"></script>
     <script src="js/baja_materia.js"></script>
     <script src="js/modal_materia.js"></script>
+
+    <!-- PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="pdf/pdf_materias.js"></script>
 </body>
 </html>
