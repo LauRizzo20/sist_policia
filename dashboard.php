@@ -62,7 +62,6 @@ include('db_config.php');
       </div>
       <div class="col-md-3">
       <input type="text" class="form-control rounded" id="searchNombre" placeholder="Buscar por Nombre">
-      </div>
     </div>
     <br><br>
     <table id="tabla0" class="table tab-content active-tab">
