@@ -66,14 +66,21 @@ if (isset($_GET['materia'])) {
     <div id="tabla1">
             <h2>Seleccione la materia para cargar las notas:</h2>
             <form action="lista_notas_por_materia.php" method="GET"> <!-- Change POST to GET -->
-                <select name="materia" required>
+            <div class="input-group col-xs-6">
+            <div class="form-group">
+                <select class="form-select form-control" name="materia" required>
                     <?php
                     while ($row = mysqli_fetch_assoc($result_materias)) {
                         echo "<option value='{$row['id_mat']}'>{$row['nombre_mat']}</option>";
                     }
                     ?>
                 </select>
-                <button type="submit">Ver Notas</button>
+            </div>
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">Ver Notas</button>
+            </span>
+            </div>    
+                
             </form>
         </div>
     <div class="container">
